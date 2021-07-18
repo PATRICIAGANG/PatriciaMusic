@@ -102,22 +102,22 @@ async def removeAdmins(client, message, current_client):
             return
 
         if user is None or user.is_bot is True:
-            m = await client.send_message(message.chat.id, f"**❎ Failed : Bots cannot be added/removed as admins and the supergorup[anonymous admin] is by default admin.**")
+            m = await client.send_message(message.chat.id, f"**❎ Fᴀɪʟᴇᴅ : Bots cannot be added/removed as admins and the supergorup[anonymous admin] is by default admin.**")
             if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                 await delayDelete(m, current_client.get('remove_messages'))
             return
         if user.id not in [c['chat_id'] for c in current_client['admins']]:
-            m = await client.send_message(message.chat.id, f"**🧐 This user is not an admin yet [ These admins are not the same as group admin! ].**")
+            m = await client.send_message(message.chat.id, f"**🧐 Usᴇʀ Is Nᴏᴛ Aᴅᴍɪɴ Yᴇᴛ[ Tʜᴇʀᴇ Aᴅᴍɪɴ Aʀᴇ Nᴏᴛ Sᴀᴍᴇ As Gʀᴏᴜᴩ! ].**")
             if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
                 await delayDelete(m, current_client.get('remove_messages'))
             return
         newadmin = {'chat_id': user.id, 'username': user.username if hasattr(
             user, 'username') else ''}
         logInfo(
-            f"making call to remove the admin in chat : {chat_id} , admins : {newadmin}")
+            f"Mᴀᴋɪɴɢ Cᴀʟʟ Tᴏ Rᴇᴍᴏᴠᴇ Tʜᴇ Aᴅᴍɪɴ Iɴ Cʜᴀᴛ : {chat_id} , admins : {newadmin}")
 
         MongoDBClient.remove_admins(chat_id, newadmin)
-        m = await client.send_message(message.chat.id, f"**__Successfully removed the user from admin list : {newadmin['username'] if newadmin['username'] not in [''] else newadmin['chat_id']}__**")
+        m = await client.send_message(message.chat.id, f"**__Sᴜᴄᴄᴇssғᴜʟʟʏ Rᴇᴍᴏᴠᴇᴅ Tʜᴇ Usᴇʀ : {newadmin['username'] if newadmin['username'] not in [''] else newadmin['chat_id']}__**")
         if current_client.get('remove_messages') is not None and current_client.get('remove_messages') > 0:
             await delayDelete(m, current_client.get('remove_messages'))
         return
@@ -140,7 +140,7 @@ async def listAdmins(client, message, current_client):
         logInfo(f"listadmins command in chat : {chat_id}")
 
         if len(current_client['admins']) == 0:
-            msg = "**__No MusicPlayer Admins have been added yet.__**"
+            msg = "**__Nᴏ Mᴜsɪᴄ Pʟᴀʏᴇʀ Aᴅᴍɪɴ Hᴀs Bᴇᴇɴ Aᴅᴅᴇᴅ Yᴇᴛ.__**"
         else:
             msg = "**Current MusicPlayer Admins:**\n\n"
             for i in range(len(current_client['admins'])):
@@ -159,7 +159,7 @@ async def listAdmins(client, message, current_client):
         return
 
 
-@Client.on_message(filters.command(['adminmode', 'adminmode@vcplayerbot']) & ~filters.edited & ~filters.bot)
+@Client.on_message(filters.command(['adminmode', 'adminmode@Patricia_robot']) & ~filters.edited & ~filters.bot)
 @database_check
 @chat_allowed
 @admin_check
@@ -171,17 +171,17 @@ async def adminModeToggle(client, message, current_client):
         if len(message.command) > 1 and message.command[1].lower() in ['on', 'off']:
             new_status = True if message.command[1].lower() == 'on' else False
             if current_client.get('admin_mode') == new_status:
-                msg = f"**🐶 The desired status is same as the current one , hence no change was done!**"
+                msg = f"**🐶 Tʜᴇ Dᴇsɪʀᴇᴅ Sᴛᴀᴛᴜs Is Tʜᴇ Cᴜʀʀᴇɴᴛ Oɴᴇ  ,Hᴇɴᴄᴇ Nᴏᴛʜɪɴɢ Cʜᴀɴɢᴇᴅ!**"
             else:
                 MongoDBClient.update_admin_mode(chat_id, new_status)
-                msg = f"**✅ Changed the Admin Mode : {new_status}.**"
+                msg = f"**✅ Cʜᴀɴɢᴇᴅ Tʜᴇ Aᴅᴍɪɴ Mᴏᴅᴇ : {new_status}.**"
                 if new_status is True:
-                    msg = msg + f"\n\n__Now only admins will be bale to perform bot actions.__"
+                    msg = msg + f"\n\n__Nᴏᴡ Oɴʟʏ Aᴅᴍɪɴ Wɪʟʟ Aʙʟᴇ Tᴏ Pᴇʀғᴏʀᴍ Tʜɪs Aᴄᴛɪᴏɴ.__"
                 else:
-                    msg = msg + f"\n\n__Now any user can perform the common bot actions.__"
+                    msg = msg + f"\n\n__Nᴏᴡ Aɴʏ Usᴇʀ Cᴀɴ Pᴇʀғᴏʀᴍ Tʜɪs Aᴄᴛɪᴏɴ.__"
 
         else:
-            msg = f"**😯Incorrect command, Correct Usage ⤵️ **\n__/adminmode on|off__"
+            msg = f"**😯Iɴᴄᴏʀʀᴇᴄᴛ Cᴏᴍᴍᴀɴᴅ, Cᴏʀʀᴇᴄᴛ Usᴀɢᴇ ⤵️ **\n__/adminmode on|off__"
 
         m = await client.send_message(message.chat.id, f"{msg}")
         await delayDelete(m, 10)
