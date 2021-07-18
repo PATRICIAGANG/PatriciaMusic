@@ -32,7 +32,7 @@ DownloaderService = Downloader()
 Config = Config()
 
 
-@Client.on_message(filters.command(['play', 'play@vcplayerbot']) & ~filters.edited & ~filters.bot)
+@Client.on_message(filters.command(['play', 'play@patricia_robot']) & ~filters.edited & ~filters.bot)
 @chat_allowed
 @admin_mode_check
 async def play(client, message, current_client):
