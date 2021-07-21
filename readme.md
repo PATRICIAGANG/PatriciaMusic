@@ -1,7 +1,11 @@
 # Telegram VCPlayer Bot
 Play any song directly into your group voice chat.
 
-Official Bot : [VCPlayerBot](https://telegram.me/vcplayerbot)   |   Discussion Group : [VoiceChat Music Player Support](https://telegram.me/voicechatsupport)
+Official 
+
+
+
+[![Deploy+on+Railway](https://railway.app/button.svg)](https://railway.app/new/template=https://github.com/PATRICIAGANG/PatriciaMusic&envs=USERBOT_SESSION,API_HASH,API_ID,BOT_TOKEN )Bot : [VCPlayerBot](https://telegram.me/vcplayerbot)   |   Discussion Group : [VoiceChat Music Player Support](https://telegram.me/voicechatsupport)
 
 <p align="center">
   <img width="200" height="200" src="https://i.postimg.cc/QdH3XrxV/Screenshot-2021-05-05-203005-removebg-preview.png">
